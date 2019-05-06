@@ -37,7 +37,7 @@ https://www.youtube.com/watch?v=sJXZ9Dok7u8&list=TLGG3Wv50y2cGgswNjA1MjAxOQ
 
 ### Help
 
-```javascript
+```
 $ ytb-bpm --help
 
 Usage: ytb-bpm [options]

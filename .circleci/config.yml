@@ -1,0 +1,69 @@
+
+aliases:
+  - &restore-yarn-cache
+    name: Restore package Cache
+    key: yarn-packages-{{ checksum "yarn.lock" }}
+
+  - &npmrc
+    |
+      echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+
+  - &save-yarn-cache
+    name: Save package Cache
+    paths:
+      - node_modules
+      - ~/.cache/yarn
+    key: yarn-packages-{{ checksum "yarn.lock" }}
+
+  - &yarn-install
+    |
+      yarn install --non-interactive --cache-folder ~/.cache/yarn
+
+  - &yarn-test
+    |
+      yarn test
+
+  - &yarn-publish
+    |
+      yarn publish
+
+version: 2
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          context: default
+          filters:
+            tags:
+              only: /.*/
+      - npm_publish:
+          context: default
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache: *restore-yarn-cache
+      - run: *npmrc
+      - run: *yarn-install
+      - save_cache: *save-yarn-cache
+      - run: *yarn-test
+  npm_publish:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache: *restore-yarn-cache
+      - run: *npmrc
+      - run: *yarn-install
+      - save_cache: *save-yarn-cache
+      - run: *yarn-publish

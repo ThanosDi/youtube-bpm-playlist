@@ -11,6 +11,10 @@
   "bin": {
     "ytb-bpm": "./src/index.js"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/ThanosDi/youtube-bpm-playlist.git"
+  },
   "author": "ThanosDi <thanosdi@live.com>",
   "license": "MIT",
   "dependencies": {

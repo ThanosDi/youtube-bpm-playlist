@@ -23,7 +23,7 @@ $ npm install -g youtube-bpm-playlist
 $ ytb-bpm --bpm 110 --genre 44 --apikey aValidApiKey
 ```
 Output
-```javascript
+```
  __   __         _____      _            ____  ____  __  __         _             _ _     _   
  \ \ / /__  _   |_   _|   _| |__   ___  | __ )|  _ \|  \/  |  _ __ | | __ _ _   _| (_)___| |_ 
   \ V / _ \| | | || || | | | '_ \ / _ \ |  _ \| |_) | |\/| | | '_ \| |/ _` | | | | | / __| __|

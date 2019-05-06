@@ -7,7 +7,7 @@ This is free and to obtain one you have to follow this procedure.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3jZ5vnv-LZc/0.jpg)](https://www.youtube.com/watch?v=3jZ5vnv-LZc)
 
-You can save you api key as an env variable `YOUTUBE_DATA_API_3` or add it inline with the `--apikey` variable.
+You can save your api key as an env variable `YOUTUBE_DATA_API_3` or add it inline with the `--apikey` variable.
 
 Youtube API has a daily 10.000 units limit per day, but each search "costs" 100 units.
 So for example each playlist will aprox. cost 2.500 units (searching about 25 song). This result that the app can be used about 4 times a day.
@@ -20,7 +20,7 @@ $ npm install -g youtube-bpm-playlist
 
 ## Usage
 ```javascript
-$ ytb-bpm --bpm 110 --genre 44 --apikey aValidApiKey
+$ ytb-bpm --bpm 110 --genre 44 --apikey "AIvaSyC0vcw1PS1Q17uLqvTKZAaO1IS9i9945gw"
 ```
 Output
 ```

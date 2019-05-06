@@ -33,12 +33,12 @@ workflows:
   build_and_deploy:
     jobs:
       - build:
-          context: default
+          context: ThanosDi
           filters:
             tags:
               only: /.*/
       - npm_publish:
-          context: default
+          context: ThanosDi
           requires:
             - build
           filters:

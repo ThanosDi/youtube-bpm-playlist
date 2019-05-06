@@ -1,7 +1,7 @@
 {
   "name": "youtube-bpm-playlist",
   "description": "Create a youtube playlist for songs of certain bpm tempo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./src/index.js",
   "scripts": {
     "dev": "nodemon ./src/index.js",
@@ -12,8 +12,8 @@
     "ytb-bpm": "./src/index.js"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/ThanosDi/youtube-bpm-playlist.git"
+    "type": "git",
+    "url": "https://github.com/ThanosDi/youtube-bpm-playlist.git"
   },
   "author": "ThanosDi <thanosdi@live.com>",
   "license": "MIT",

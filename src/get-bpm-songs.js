@@ -15,7 +15,6 @@ const getSongs = async (bpm = 110, genre = 731) => {
 	$('#track-table tbody .title', html).each(function() {
 		titles.push($(this).text());
 	});
-
 	return pipe(
 		artists => artists.map((artist, i) => `${artist} - ${titles[i]}`),
 		uniq

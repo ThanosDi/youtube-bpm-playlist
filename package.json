@@ -1,15 +1,17 @@
 {
-  "name": "youtube_bpm_playlist",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "youtube-bpm-playlist",
+  "description": "Create a youtube playlist for songs of certain bpm tempo",
+  "version": "0.1.0",
+  "main": "./src/index.js",
   "scripts": {
-    "dev": "nodemon ./index.js",
+    "dev": "nodemon ./src/index.js",
     "lint": "xo",
     "test": "jest"
   },
   "bin": {
-    "ytb-bpm": "./index.js"
+    "ytb-bpm": "./src/index.js"
   },
+  "author": "ThanosDi <thanosdi@live.com>",
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",

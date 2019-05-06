@@ -1,9 +1,11 @@
 # YouTube BPM Playlist :tea:
 
 Create a youtube playlist for songs of certain bpm tempo :rocket:
-## WARNING
+## Before using it
 For this program to work you need to have a valid API Key for YouTube.
 This is free and to obtain one you have to follow this procedure.
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3jZ5vnv-LZc/0.jpg)](https://www.youtube.com/watch?v=3jZ5vnv-LZc)
 
 You can save you api key as an env variable `YOUTUBE_DATA_API_3` or add it inline with the `--apikey` variable.
 
@@ -11,17 +13,14 @@ Youtube API has a daily 10.000 units limit per day, but each search "costs" 100 
 So for example each playlist will aprox. cost 2.500 units (searching about 25 song). This result that the app can be used about 4 times a day.
 More info: https://developers.google.com/youtube/v3/getting-started#quota
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3jZ5vnv-LZc/0.jpg)](https://www.youtube.com/watch?v=3jZ5vnv-LZc)
-
-
 ## Install :hammer:
 ```bash
-$ npm install -G ytb-bpm
+$ npm install -g youtube-bpm-playlist
 ```
 
 ## Usage
 ```javascript
-$ ytb-bpm --bpm 110 --genre 44 -apikey aValidApiKey
+$ ytb-bpm --bpm 110 --genre 44 --apikey aValidApiKey
 ```
 Output
 ```javascript
@@ -40,6 +39,16 @@ https://www.youtube.com/watch?v=sJXZ9Dok7u8&list=TLGG3Wv50y2cGgswNjA1MjAxOQ
 
 ```javascript
 $ ytb-bpm --help
+
+Usage: ytb-bpm [options]
+
+Options:
+  -V, --version          output the version number
+  -b, --bpm [bpm]        Add the desired bpm (default: 110)
+  -g, --genre [genre]    Enter the genre code number. Default is Rock (default: 38)
+  -k, --apikey [apikey]  Enter a valid Youtube data api key.
+  -h, --help             output usage information
+
 ```
 
 ### Genres supported [-g param]
@@ -209,25 +218,6 @@ $ ytb-bpm --help
       Vocal : 801
 ```
 
-## Testing :bomb:
-```bash
-$ yarn test     # add -- --watch to monitor for changes
-```
+### Kind reminder
 
-## Deploy :ship:
-This app will automatically get published under `@thechatshop/your-module-name` on npm (when new code is on master and a new tag exists with `vX.X.X` format)
-
-:rotating_light: **Check the [config.yml](./.circleci/config.yml) for more**
-
-Here is an example:
-
-```bash
-git checkout master
-# Will generate a tag as well
-npm version patch #or major, minor, patch
-
-git push --follow-tags
-```
-
-## License
-The Chat Shop proprietary license
+Remember to save you playlists so you don't overuse the api!

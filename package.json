@@ -1,0 +1,55 @@
+{
+  "name": "youtube_bpm_playlist",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "lint": "xo",
+    "test": "jest"
+  },
+  "bin": {
+    "ytb-bpm": "./index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "commander": "^2.20.0",
+    "figlet": "^1.2.1",
+    "googleapis": "^39.2.0",
+    "jest": "^24.7.1",
+    "ramda": "^0.26.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "youtube-node": "^1.3.3",
+    "youtube-v3-api": "^1.1.1"
+  },
+  "devDependencies": {
+    "husky": "^2.2.0",
+    "lint-staged": "^8.1.6",
+    "nodemon": "^1.18.11",
+    "xo": "^0.24.0"
+  },
+  "lint-staged": {
+    "*": [
+      "xo --fix",
+      "git add"
+    ]
+  },
+  "xo": {
+    "prettier": true,
+    "envs": [
+      "jest",
+      "node",
+      "browser"
+    ],
+    "rules": {
+      "camelcase": 1
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  }
+}

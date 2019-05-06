@@ -1,0 +1,1446 @@
+module.exports = module.exports = `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="author" content="BPMDatabase.com">
+    <meta name="keywords"
+          content="bpmdatabase, bpm database, bpmdb, music search, harmonic mixing, music keys, dj, beat per minute, beat counter, music profile, mixing">
+    <meta name="description"
+          content="Search BPM Database, Submit Music Profiles, harmonic mixing, music keys, DJ Community, Mixing help">
+    <meta property="og:url" content="http://www.bpmdatabase.com">
+    <title>BPM Database - Search</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/js/jquery-ui-1.12.0/jquery-ui.min.css">
+    <link rel="stylesheet" href='/static/css/base.css'>
+    <link rel="stylesheet" href='/static/css/bootstrap-social.css'>
+    <link rel="shortcut icon" type="image/ico" href="/static/images/favicon.ico">
+
+    <script src='/static/js/jquery-ui-1.12.0/external/jquery/jquery.js'></script>
+    <script src='/static/js/jquery-ui-1.12.0/jquery-ui.min.js'></script>
+    <script src='/static/js/jquery.ui.touch-punch.min.js'></script>
+    <script src="https://use.fontawesome.com/435caca5c4.js"></script>
+    <script src='/static/js/bootstrap.min.js'></script>
+    <script src='/static/js/main.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <!--<script src='/static/js/jquery.json.js'></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Header Tag Code -->
+    <script data-cfasync='false'
+            type='text/javascript'>/*<![CDATA[*/(function (a, c, s, u) { 'Insticator' in a || (a.Insticator = { ad: { loadAd: function (b) { Insticator.ad.q.push(b) }, q: [] }, helper: {}, embed: {}, version: "3.0", q: [], load: function (t, o) { Insticator.q.push({ t: t, o: o }) } }); var b = c.createElement(s); b.src = u; b.async = !0; var d = c.getElementsByTagName(s)[0]; d.parentNode.insertBefore(b, d) })(window, document, 'script', '//d2na2p72vtqyok.cloudfront.net/client-embed/4804dad0-0f77-4f97-981d-56786751a1b7.js');/*]]>*/</script>
+    <!-- End Header Tag Code -->
+
+    <link rel="stylesheet" href='/static/django_tables2/themes/bootstrap3/css/bootstrap-table2.css' />
+    <!--     <link rel="stylesheet" href='/static/django_tables2/themes/paleblue/css/screen.css' />-->
+
+</head>
+
+<body>
+<div id="fb-root"></div>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" title="BPM Database, music search and playlist manager."><img
+                    style="max-width:120px;" src="/static/images/bpm_logo2.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/music/">Browse<span class="sr-only"></span></a></li>
+
+                <li><a href="/accounts/login/" data-toggle="tooltip" data-placement="bottom"
+                       title="Sign In to Submit">Submit</a></li>
+
+            </ul>
+            <form class="navbar-form navbar-left" role="search" method="GET" action="/music/search/">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" pattern=".{2,}"
+                           title="2 characters minimum" name="q" id="search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i
+                                class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a id="login" href="/accounts/login/"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>
+                    Sign In</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div id="messages">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="well">
+        <div class="row">
+            <form role="search" method="GET" action="/music/search/">
+                <div class="form-group form-group-sm col-xs-6 col-sm-3">
+                    <label for="artist-search">Artist:</label>
+                    <input type="text" class="form-control searchinput" placeholder="artist" name="artist"
+                           id="artist-search" value="">
+                </div>
+                <div class="form-group form-group-sm col-xs-6 col-sm-3">
+                    <label for="title-search">Title:</label>
+                    <input type="text" class="form-control searchinput" placeholder="title" name="title"
+                           id="title-search" value="">
+                </div>
+                <div class="form-group form-group-sm col-xs-6 col-sm-3">
+                    <label for="bpm-search">BPM:</label>
+                    <input type="text" class="form-control searchinput" placeholder="bpm" name="bpm" id="bpm-search"
+                           value="100">
+                </div>
+                <div class="form-group form-group-sm col-xs-6 col-sm-3">
+                    <label for="genre-search">Genre:</label>
+                    <select class="form-control" name="genre">
+                        <option value=""></option>
+
+                        <option value="818">2-Step</option>
+
+                        <option value="700">A capella</option>
+
+                        <option value="1">Acid</option>
+
+                        <option value="701">Acid Jazz</option>
+
+                        <option value="702">Acid Punk</option>
+
+                        <option value="703">Acoustic</option>
+
+                        <option value="704">Alternative</option>
+
+                        <option value="705">AlternRock</option>
+
+                        <option value="2">Ambient</option>
+
+                        <option value="706">Avantgarde</option>
+
+                        <option value="813">Bachata</option>
+
+                        <option value="707">Ballad</option>
+
+                        <option value="814">Banda</option>
+
+                        <option value="708">Bass</option>
+
+                        <option value="709">Bebob</option>
+
+                        <option value="710">Big Band</option>
+
+                        <option value="711">Bluegrass</option>
+
+                        <option value="712">Blues</option>
+
+                        <option value="3">Booty Bass</option>
+
+                        <option value="4">Breaks</option>
+
+                        <option value="713">Cabaret</option>
+
+                        <option value="714">Celtic</option>
+
+                        <option value="817">Cha-Cha</option>
+
+                        <option value="715">Chamber Music</option>
+
+                        <option value="716">Chanson</option>
+
+                        <option value="802">Chinese</option>
+
+                        <option value="717">Chorus</option>
+
+                        <option value="816">Christian</option>
+
+                        <option value="718">Christian Rap</option>
+
+                        <option value="720">Classical</option>
+
+                        <option value="719">Classic Rock</option>
+
+                        <option value="5">Club</option>
+
+                        <option value="721">Comedy</option>
+
+                        <option value="722">Country</option>
+
+                        <option value="723">Cult</option>
+
+                        <option value="6">Dance</option>
+
+                        <option value="811">Dancehall</option>
+
+                        <option value="724">Dance Hall</option>
+
+                        <option value="725">Darkwave</option>
+
+                        <option value="726">Death Metal</option>
+
+                        <option value="805">Deep House</option>
+
+                        <option value="7">Disco</option>
+
+                        <option value="8">Disco House</option>
+
+                        <option value="727">Dream</option>
+
+                        <option value="9">Drum &amp; Bass</option>
+
+                        <option value="728">Drum Solo</option>
+
+                        <option value="806">Dubstep</option>
+
+                        <option value="729">Duet</option>
+
+                        <option value="730">Easy Listening</option>
+
+                        <option value="731">Electronic</option>
+
+                        <option value="809">Electronica</option>
+
+                        <option value="10">Epic Trance</option>
+
+                        <option value="732">Ethnic</option>
+
+                        <option value="11">Eurodance</option>
+
+                        <option value="12">Eurohouse</option>
+
+                        <option value="13">Euro-Techno</option>
+
+                        <option value="14">Experimental</option>
+
+                        <option value="733">Fast Fusion</option>
+
+                        <option value="734">Folk</option>
+
+                        <option value="735">Folklore</option>
+
+                        <option value="736">Folk-Rock</option>
+
+                        <option value="15">Freestyle</option>
+
+                        <option value="737">Funk</option>
+
+                        <option value="738">Fusion</option>
+
+                        <option value="739">Game</option>
+
+                        <option value="740">Gangsta</option>
+
+                        <option value="16">Garage</option>
+
+                        <option value="17">Goa Trance</option>
+
+                        <option value="741">Gospel</option>
+
+                        <option value="742">Gothic</option>
+
+                        <option value="743">Gothic Rock</option>
+
+                        <option value="744">Grunge</option>
+
+                        <option value="18">Happy Hardcore</option>
+
+                        <option value="21">Hardcore</option>
+
+                        <option value="19">Hard House</option>
+
+                        <option value="745">Hard Rock</option>
+
+                        <option value="20">Hard Trance</option>
+
+                        <option value="22">Hi-NRG</option>
+
+                        <option value="23">Hip-Hop</option>
+
+                        <option value="24">House</option>
+
+                        <option value="746">Humour</option>
+
+                        <option value="747">Industrial</option>
+
+                        <option value="748">Instrumental</option>
+
+                        <option value="749">Instrumental Pop</option>
+
+                        <option value="750">Instrumental Rock</option>
+
+                        <option value="25">International</option>
+
+                        <option value="751">Jazz</option>
+
+                        <option value="752">Jazz+Funk</option>
+
+                        <option value="26">J-Pop</option>
+
+                        <option value="27">Jungle</option>
+
+                        <option value="753">K-Pop</option>
+
+                        <option value="28">Latin</option>
+
+                        <option value="807">Latin Pop</option>
+
+                        <option value="754">Lo-Fi</option>
+
+                        <option value="755">Meditative</option>
+
+                        <option value="815">Merengue Mambo</option>
+
+                        <option value="756">Metal</option>
+
+                        <option value="757">Musical</option>
+
+                        <option value="758">National Folk</option>
+
+                        <option value="759">Native American</option>
+
+                        <option value="760">New Age</option>
+
+                        <option value="29">New Wave</option>
+
+                        <option value="761">Noise</option>
+
+                        <option value="762">Oldies</option>
+
+                        <option value="30">Old School</option>
+
+                        <option value="763">Opera</option>
+
+                        <option value="764">Other</option>
+
+                        <option value="765">Polka</option>
+
+                        <option value="31">Pop</option>
+
+                        <option value="768">Pop-Folk</option>
+
+                        <option value="767">Pop/Funk</option>
+
+                        <option value="769">Porn Groove</option>
+
+                        <option value="770">Power Ballad</option>
+
+                        <option value="771">Pranks</option>
+
+                        <option value="772">Primus</option>
+
+                        <option value="32">Progressive House</option>
+
+                        <option value="773">Progressive Rock</option>
+
+                        <option value="33">Progressive Trance</option>
+
+                        <option value="774">Psychedelic Rock</option>
+
+                        <option value="34">Psychedelic Trance</option>
+
+                        <option value="775">Punk</option>
+
+                        <option value="776">Punk Rock</option>
+
+                        <option value="36">Ragga</option>
+
+                        <option value="777">Rap</option>
+
+                        <option value="778">Rave</option>
+
+                        <option value="35">R&amp;B</option>
+
+                        <option value="37">Reggae</option>
+
+                        <option value="810">Reggaeton</option>
+
+                        <option value="779">Retro</option>
+
+                        <option value="780">Revival</option>
+
+                        <option value="781">Rhythmic Soul</option>
+
+                        <option value="38" selected>Rock</option>
+
+                        <option value="782">Rock &amp; Roll</option>
+
+                        <option value="812">Salsa</option>
+
+                        <option value="39">Samba</option>
+
+                        <option value="783">Satire</option>
+
+                        <option value="784">Showtunes</option>
+
+                        <option value="785">Ska</option>
+
+                        <option value="40">Slow Jam</option>
+
+                        <option value="786">Slow Rock</option>
+
+                        <option value="787">Sonata</option>
+
+                        <option value="41">Soul</option>
+
+                        <option value="788">Sound Clip</option>
+
+                        <option value="789">Soundtrack</option>
+
+                        <option value="790">Southern Rock</option>
+
+                        <option value="791">Space</option>
+
+                        <option value="792">Speech</option>
+
+                        <option value="793">Swing</option>
+
+                        <option value="794">Symphonic Rock</option>
+
+                        <option value="795">Symphony</option>
+
+                        <option value="796">Tango</option>
+
+                        <option value="42">Tech House</option>
+
+                        <option value="43">Techno</option>
+
+                        <option value="798">Techno-Industrial</option>
+
+                        <option value="803">Thai</option>
+
+                        <option value="799">Top 40</option>
+
+                        <option value="800">Trailer</option>
+
+                        <option value="44">Trance</option>
+
+                        <option value="45">Tribal</option>
+
+                        <option value="46">Trip-Hop</option>
+
+                        <option value="808">Urban</option>
+
+                        <option value="804">Vietnamese</option>
+
+                        <option value="801">Vocal</option>
+
+                    </select>
+                </div>
+                <button class="btn btn-default btn-sm pull-right" id="btn-search" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-bottom: 10px;height: 101px;">
+        <div class="col-xs-12" align="center">
+            <div id="div-insticator-ad-3"></div>
+            <script data-cfasync='false' type="text/javascript">
+                /*<![CDATA[*/Insticator.ad.loadAd("div-insticator-ad-3");/*]]>*/
+            </script>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form method='POST' id="add-track-form" action='/users/add/'><input type='hidden'
+                                                                                name='csrfmiddlewaretoken'
+                                                                                value='W67ak8QygH8QP9PYp9VxeGF662p44XOEBlAGSeNu3Uslkw2CR8ruJpyV0JRJuYAS' />
+
+
+
+
+
+                <div class="table-responsive">
+
+
+
+                    <table id="track-table" class="table table-bordered table-condensed table-striped">
+
+                        <thead>
+                        <tr>
+
+
+                            <th class="artist orderable"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=artist&amp;genre=38">Artist</a>
+                            </th>
+
+
+
+                            <th class="orderable title"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=title&amp;genre=38">Title</a>
+                            </th>
+
+
+
+                            <th class="mix orderable"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=mix&amp;genre=38">Mix</a>
+                            </th>
+
+
+
+                            <th class="bpm orderable"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=bpm&amp;genre=38">BPM</a>
+                            </th>
+
+
+
+                            <th class="genre orderable"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=genre&amp;genre=38">Genre</a>
+                            </th>
+
+
+
+                            <th class="orderable rlabel"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=rlabel&amp;genre=38">Label</a>
+                            </th>
+
+
+
+                            <th class="orderable year"><a
+                                    href="?bpm=100&amp;title=&amp;artist=&amp;sort=year&amp;genre=38">Year</a>
+                            </th>
+
+
+
+                            <th class="download">Download</th>
+
+
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/3rd-bass">3rd Bass</a></td>
+
+                            <td class="title">Pop Goes The Weasel</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Def Jam/Columbia/Sony</td>
+
+                            <td class="year">2007</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=3rd+Bass+Pop+Goes+The+Weasel&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/pop-goes-the-weasel/id376452?i=376416&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/adelitas-way">Adelitas Way</a></td>
+
+                            <td class="title">Notorious</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">—</td>
+
+                            <td class="year">2018</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Adelitas+Way+Notorious&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/notorious/1254513476?i=1254513478&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/adelitas-way">Adelitas Way</a></td>
+
+                            <td class="title">Notorious</td>
+
+                            <td class="mix">Lyric Video</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Lyric Video</td>
+
+                            <td class="year">2018</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Adelitas+Way+Notorious&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/notorious/1254513476?i=1254513478&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/adelitas-way">Adelitas Way</a></td>
+
+                            <td class="title">Sick</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Virgin</td>
+
+                            <td class="year">2011</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Adelitas+Way+Sick&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/sick/id713042698?i=713043025&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/aerosmith">Aerosmith</a></td>
+
+                            <td class="title">Sweet Emotion</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Columbia</td>
+
+                            <td class="year">2012</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Aerosmith+Sweet+Emotion&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/sweet-emotion/id457003264?i=457003295&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/alabama-shakes">Alabama Shakes</a></td>
+
+                            <td class="title">Don&#39;t Wanna Fight</td>
+
+                            <td class="mix">Live From Capitol Studio A</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">ATO</td>
+
+                            <td class="year">2015</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Alabama+Shakes+Don%27t+Wanna+Fight&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/dont-wanna-fight/id1072178350?i=1072178457&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/anberlin">Anberlin</a></td>
+
+                            <td class="title">Unstable</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Universal Republic</td>
+
+                            <td class="year">2013</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Anberlin+Unstable&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/unstable/id560578373?i=560578413&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/anne-marie">Anne-Marie</a></td>
+
+                            <td class="title">Karate</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Major Tom&#39;s/Warner UK</td>
+
+                            <td class="year">2015</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Anne-Marie+Karate&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/gemini/1007305624?i=1007306376&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/audioslave">Audioslave</a></td>
+
+                            <td class="title">Doesn&#39;t Remind Me</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Epic Interscope</td>
+
+                            <td class="year">2005</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Audioslave+Doesn%27t+Remind+Me&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/doesnt-remind-me/id64614785?i=64614824&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/av-super-sunshine">AV Super Sunshine</a></td>
+
+                            <td class="title">I Am Alien</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Victor House</td>
+
+                            <td class="year">2016</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=AV+Super+Sunshine+I+Am+Alien&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/i-am-alien/id1178718679?i=1178718685&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+                        <tr class="odd" style="height:101px;">
+                            <td colspan="12" align="center">
+
+                                <!-- Insticator API Fire Widget Ads Code -->
+                                <div id="div-insticator-ad-4"></div>
+                                <script data-cfasync='false' type="text/javascript">
+                                    /*<![CDATA[*/Insticator.ad.loadAd("div-insticator-ad-4");/*]]>*/
+                                </script>
+                                <!-- End Insticator API Fire Widget Ads Code -->
+                            </td>
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/awolnation-2">Awolnation</a></td>
+
+                            <td class="title">THISKIDSNOTALRIGHT</td>
+
+                            <td class="mix">Lyric Video</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Red Bull</td>
+
+                            <td class="year">2013</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Awolnation+THISKIDSNOTALRIGHT&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/thiskidsnotalright/id726737916?i=726738789&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/awolnation-2">Awolnation</a></td>
+
+                            <td class="title">THISKIDSNOTALRIGHT</td>
+
+                            <td class="mix">Lyric Video EXPLICIT</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Red Bull</td>
+
+                            <td class="year">2013</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Awolnation+THISKIDSNOTALRIGHT&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/thiskidsnotalright/id726737916?i=726738789&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/awolnation-2">Awolnation</a></td>
+
+                            <td class="title">Woman Woman</td>
+
+                            <td class="mix"> Quick Edit*</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Red Bull</td>
+
+                            <td class="year">2016</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Awolnation+Woman+Woman&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/woman-woman/id960837189?i=960837200&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/ben-taylor">Ben Taylor</a></td>
+
+                            <td class="title">Worlds Are Made Of Paper</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Sun Pedal</td>
+
+                            <td class="year">2012</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Ben+Taylor+Worlds+Are+Made+Of+Paper&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/worlds-are-made-of-paper/id541695448?i=541696413&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/best-coast">Best Coast</a></td>
+
+                            <td class="title">Heaven Sent</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Harvest</td>
+
+                            <td class="year">2015</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Best+Coast+Heaven+Sent&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/heaven-sent/967039995?i=967040008&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/black-stone-cherry">Black Stone Cherry</a>
+                            </td>
+
+                            <td class="title">White Trash Millionaire</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Roadrunner</td>
+
+                            <td class="year">2011</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Black+Stone+Cherry+White+Trash+Millionaire&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/white-trash-millionaire/433666459?i=433666608&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/blaqk-audio">Blaqk Audio</a></td>
+
+                            <td class="title">Faith Healer</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Superball</td>
+
+                            <td class="year">2012</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Blaqk+Audio+Faith+Healer&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/faith-healer/1045690176?i=1045690187&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/blink-182-2">Blink-182</a></td>
+
+                            <td class="title">Josie</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Geffen</td>
+
+                            <td class="year">2016</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Blink-182+Josie&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/josie/id1125478946?i=1125479053&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/blur">Blur</a></td>
+
+                            <td class="title">Lonesome Street</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Parlophone/Warner Bros</td>
+
+                            <td class="year">2015</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Blur+Lonesome+Street&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/lonesome-street/id966943210?i=966943222&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/brandy-ft-mae">Brandy ft. Ma$e</a></td>
+
+                            <td class="title">Top Of The World</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Atlantic</td>
+
+                            <td class="year">2013</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Brandy+Ma%24e+Top+Of+The+World&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/brian-mackey">Brian Mackey</a></td>
+
+                            <td class="title">America</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Brian Mackey</td>
+
+                            <td class="year">2014</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Brian+Mackey+America&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/america/867556951?i=867556987&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/brooke-fraser">Brooke Fraser</a></td>
+
+                            <td class="title">Kings &amp; Queens</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Vagrant</td>
+
+                            <td class="year">2015</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Brooke+Fraser+Kings+%26+Queens&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/kings-and-queens/id1176782525?i=1176782529&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/camron-ft-mase">Cam&#39;ron ft. Mase</a></td>
+
+                            <td class="title">Horse &amp; Carriage</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Untertainment/Epic</td>
+
+                            <td class="year">2013</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Cam%27ron+Mase+Horse+%26+Carriage&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/horse-carriage-featuring-mase/193063084?i=193063112&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="odd">
+
+                            <td class="artist"><a href="/music/by/chappell-roan">Chappell Roan</a></td>
+
+                            <td class="title">Good Hurt</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">—</td>
+
+                            <td class="year">2018</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Chappell+Roan+Good+Hurt&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/good-hurt/1285415885?i=1285416236&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+
+
+                        <tr class="even">
+
+                            <td class="artist"><a href="/music/by/chapterhouse">Chapterhouse</a></td>
+
+                            <td class="title">Pearl</td>
+
+                            <td class="mix">—</td>
+
+                            <td class="bpm">100</td>
+
+                            <td class="genre">Rock</td>
+
+                            <td class="rlabel">Dedicated/RCA</td>
+
+                            <td class="year">2015</td>
+
+                            <td class="download"><a
+                                    href="https://www.amazon.com/gp/search?index=digital-music&camp=1789&ie=UTF8&keywords=Chapterhouse+Pearl&creative=9325&linkCode=ur2&tag=bpmdb2-20"
+                                    target="_blank" class="amazon">Amazon</a>, <a
+                                    href="https://itunes.apple.com/us/album/pearl/217680207?i=217680213&uo=4&at=1000lpvs&cache=true"
+                                    target="_blank" class="amazon">iTunes</a></td>
+
+                        </tr>
+
+
+
+                        </tbody>
+
+
+                        <tfoot></tfoot>
+
+                    </table>
+                </div> <!-- table-responsive -->
+                <!--
+                </div>
+                </div>
+            -->
+
+
+                <div class="row">
+                    <div class="col-sm-10">
+
+
+
+
+
+                        <ul class="pagination pagination-sm">
+
+                            <li class="prev disabled">
+                                <a href="#">&laquo;</a>
+                            </li>
+
+
+
+
+                            <li class="active">
+                                <a href="#">1</a>
+                            </li>
+
+                            <li>
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=2">2</a>
+                            </li>
+
+                            <li>
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=3">3</a>
+                            </li>
+
+                            <li>
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=4">4</a>
+                            </li>
+
+                            <li>
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=5">5</a>
+                            </li>
+
+                            <li>
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=6">6</a>
+                            </li>
+
+                            <li>
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=7">7</a>
+                            </li>
+
+
+
+
+                            <li class="last">
+                                <a
+                                        href="/music/search/?artist=&amp;title=&amp;bpm=100&amp;genre=38&amp;page=7">&raquo;</a>
+                            </li>
+
+                        </ul>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+<div class="modal fade" id="fm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-loader" style="display: none;">
+        <img class="modal-loader-img" src="/static/fm/img/loading-bars.svg">
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>
+                    <div class="modal-head"></div>
+                </h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer modal-buttons">
+                <button class="btn btn-primary btn-sm" type="submit">
+                    Submit
+                </button>
+                <button data-dismiss="modal" class="btn btn-default btn-sm" type="button">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="/static/fm/css/modal.css?v=0.2.5" />
+<script type="text/javascript" src="/static/fm/js/fm.js?v=0.2.5"></script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript">
+	(function (d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=226216320765812";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+	!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
+</script>
+
+<script>
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-81140911-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+<script>
+	$(function () {
+		$.fm({ debug: true });
+		$("#x_button").click(function () {
+			$("#ad_bottom").hide();
+		});
+	});
+</script>
+
+</script>
+
+<footer class="footer">
+	<div class="container">
+	<div class="row">
+	<div class="col-sm-7">
+	<span class="copyright text-muted">Copyright ©2003-2019 BPMDatabase.com. All Rights Reserved.
+<a class="text-muted" href="/about/">About</a>
+	<a class="text-muted" href="/terms/">Terms</a>
+	<a class="text-muted" href="/privacy/">Privacy Policy</a>
+<a class="text-muted" href="/contact/">Contact</a>
+	<a class="text-muted" href="/contact/?subject=api">API</a>
+	</span>
+	</div>
+	<div class="col-sm-5">
+	<div class="social">
+	<span class="twitter">
+	<a href="http://twitter.com/share" class="twitter-share-button"
+data-url="https://www.bpmdatabase.com">Tweet</a>
+	</span>
+	<span class="facebook">
+	<div class="fb-like" data-href="https://www.bpmdatabase.com" data-layout="button_count"
+data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+	</span>
+	<span class="google">
+	<div class="g-plusone" data-size="medium" data-href="https://www.bpmdatabase.com"></div>
+	</span>
+	</div>
+	</div>
+	</div>
+	</div>
+
+	</footer>
+	</body>
+
+	</html>`

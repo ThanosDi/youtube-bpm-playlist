@@ -1,0 +1,77 @@
+._*
+.apdisk
+.AppleDB
+.AppleDesktop
+.AppleDouble
+.cache
+.com.apple.timemachine.donotpresent
+.DocumentRevisions-V100
+.env
+.envrc
+.fseventsd
+.grunt
+.lock-wscript
+.LSOverride
+.netrwhist
+.node_repl_history
+.npm
+.nyc_output
+.settings/
+.Spotlight-V100
+.TemporaryItems
+.tern-config
+.Trashes
+.VolumeIcon.icns
+.vscode/
+.idea/
+.wercker
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.cab
+*.DS_Store
+*.lnk
+*.log
+*.msi
+*.msm
+*.msp
+*.pid
+*.pid.lock
+*.seed
+*.stTheme.cache
+*.sublime-workspace
+*.tmlanguage.cache
+*.tmPreferences.cache
+*~
+$RECYCLE.BIN/
+bh_unicode_properties.cache
+bower_components
+build
+build/Release
+coverage
+Desktop.ini
+dist
+ehthumbs.db
+GitHub.sublime-settings
+Icon
+jsconfig.json
+jspm_packages
+lib-cov
+logs
+Network Trash Folder
+node_modules
+npm-debug.log*
+Package Control.ca-bundle
+Package Control.ca-certs/
+Package Control.ca-list
+Package Control.cache/
+Package Control.last-run
+Package Control.system-ca-bundle
+pids
+Session.vim
+sftp-config.json
+tags
+Temporary Items
+Thumbs.db
+tsconfig.json
+typings
+tmp

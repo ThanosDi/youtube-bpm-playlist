@@ -24,7 +24,7 @@ const init = async ({bpm, genre, apikey}) => {
 		const url = `https://www.youtube.com/watch_videos?video_ids=${joinYoutubeIds(
 			ids
 		)}`;
-
+		console.table(titles);
 		request({url, followRedirect: false}, (err, {headers}) => {
 			console.log(headers.location);
 		});

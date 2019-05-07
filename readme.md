@@ -19,20 +19,46 @@ $ npm install -g youtube-bpm-playlist
 ```
 
 ## Usage
-```javascript
+```bash
 $ ytb-bpm --bpm 110 --genre 44 --apikey "AIvaSyC0vcw1PS1Q17uLqvTKZAaO1IS9i9945gw"
 ```
 Output
-```
+```bash
+
  __   __         _____      _            ____  ____  __  __         _             _ _     _   
  \ \ / /__  _   |_   _|   _| |__   ___  | __ )|  _ \|  \/  |  _ __ | | __ _ _   _| (_)___| |_ 
   \ V / _ \| | | || || | | | '_ \ / _ \ |  _ \| |_) | |\/| | | '_ \| |/ _` | | | | | / __| __|
    | | (_) | |_| || || |_| | |_) |  __/ | |_) |  __/| |  | | | |_) | | (_| | |_| | | \__ \ |_ 
    |_|\___/ \__,_||_| \__,_|_.__/ \___| |____/|_|   |_|  |_| | .__/|_|\__,_|\__, |_|_|___/\__|
                                                              |_|            |___/             
-https://www.youtube.com/watch?v=sJXZ9Dok7u8&list=TLGG3Wv50y2cGgswNjA1MjAxOQ
-
-
+┌─────────┬─────────────────────────────────────────────────────┐
+│ (index) │                       Values                        │
+├─────────┼─────────────────────────────────────────────────────┤
+│    0    │               'ALASKALASKA - Monster'               │
+│    1    │             'Alter Bridge - Metalingus'             │
+│    2    │     'American Authors - Everything Everything'      │
+│    3    │           'Andrew McMahon - Synesthesia'            │
+│    4    │          'Andrew Watt - Ghost In My Head'           │
+│    5    │            'Anna Rose - Beautiful World'            │
+│    6    │         'Another Bad Creation - Playground'         │
+│    7    │       'Asher Roth ft. Cee-Lo - Be By Myself'        │
+│    8    │           'Avenged Sevenfold - Afterlife'           │
+│    9    │               'Beach House - Lazuli'                │
+│   10    │             'Belle Histoire - My Dear'              │
+│   11    │                'Big Star - Thirteen'                │
+│   12    │         'Bleachers - Don\'t Take The Money'         │
+│   13    │        'Blonde Redhead - Not Getting There'         │
+│   14    │               'Blue October - Say It'               │
+│   15    │              'Carter Vail - Melatonin'              │
+│   16    │               'Charming Liars - Soul'               │
+│   17    │       'Chunk! No, Captain Chunk! - All Star'        │
+│   18    │        'Club Cheval - Young Rich & Radical'         │
+│   19    │ 'December In Red ft. Jahred From Hed PE - Hadouken' │
+│   20    │         'Delafe - Lo mas bonito del mundo'          │
+│   21    │          'Delta Rae - My Whole Life Long'           │
+│   22    │       'Don Omar ft. Beenie Man - Belly Danza'       │
+└─────────┴─────────────────────────────────────────────────────┘
+https://www.youtube.com/watch?v=Pj-K9su9NpQ&list=TLGGu4usraPh0ygwNzA1MjAxOQ
 ```
 
 ### Help

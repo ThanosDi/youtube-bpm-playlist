@@ -29,6 +29,16 @@
     "youtube-node": "^1.3.3",
     "youtube-v3-api": "^1.1.1"
   },
+  "keywords": [
+    "youtube",
+    "bpm",
+    "playlist",
+    "create youtube bpm playlist",
+    "tempo",
+    "running playlist",
+    "bpm songs",
+    "running songs"
+  ],
   "devDependencies": {
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",

@@ -1,7 +1,7 @@
 {
   "name": "youtube-bpm-playlist",
   "description": "Create a youtube playlist for songs of certain bpm tempo",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "./src/index.js",
   "scripts": {
     "dev": "nodemon ./src/index.js",

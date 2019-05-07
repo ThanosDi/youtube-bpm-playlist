@@ -18,7 +18,7 @@ const joinYoutubeIds = pipe(
 
 const searchYoutubeByTitle = (title, youTube) => {
 	return new Promise((resolve, reject) => {
-		youTube.search(title, 1, {order: 'viewCount'}, (error, result) => {
+		youTube.search(title, 1, (error, result) => {
 			if (error) {
 				return reject(error);
 			}

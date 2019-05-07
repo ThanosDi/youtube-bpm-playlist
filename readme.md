@@ -24,7 +24,6 @@ $ ytb-bpm --bpm 110 --genre 44 --apikey "AIvaSyC0vcw1PS1Q17uLqvTKZAaO1IS9i9945gw
 ```
 Output
 ```bash
-
  __   __         _____      _            ____  ____  __  __         _             _ _     _   
  \ \ / /__  _   |_   _|   _| |__   ___  | __ )|  _ \|  \/  |  _ __ | | __ _ _   _| (_)___| |_ 
   \ V / _ \| | | || || | | | '_ \ / _ \ |  _ \| |_) | |\/| | | '_ \| |/ _` | | | | | / __| __|
@@ -58,7 +57,8 @@ Output
 │   21    │          'Delta Rae - My Whole Life Long'           │
 │   22    │       'Don Omar ft. Beenie Man - Belly Danza'       │
 └─────────┴─────────────────────────────────────────────────────┘
-https://www.youtube.com/watch?v=Pj-K9su9NpQ&list=TLGGu4usraPh0ygwNzA1MjAxOQ
+https://www.youtube.com/watch?v=mhapcdE2SJU&list=TLGGvF3phpHs6oEwNzA1MjAxOQ
+
 ```
 
 ### Help

@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "commander": "^2.20.0",
+    "commander": "^3.0.0",
     "figlet": "^1.2.1",
     "googleapis": "^39.2.0",
     "jest": "^24.7.1",

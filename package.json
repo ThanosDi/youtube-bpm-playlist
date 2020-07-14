@@ -21,7 +21,7 @@
     "cheerio": "^1.0.0-rc.3",
     "commander": "^3.0.0",
     "figlet": "^1.2.1",
-    "googleapis": "^42.0.0",
+    "googleapis": "^54.0.0",
     "ramda": "^0.26.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",

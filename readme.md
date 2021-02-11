@@ -247,3 +247,6 @@ Options:
 ### Kind reminder
 
 Remember to save you playlists so you don't overuse the api!
+
+
+Buy Me A Beer: `1KuCYGRWnBQDAgFiEuXc3Mtpk2yjMDadLo` BTC Wallet
